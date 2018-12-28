@@ -3,6 +3,7 @@ import Pixel from './pixel.js';
 export default class Screen {
 
   constructor() {
+    this.firstRender = false;
     this.pixelSpacing = 2;
     this.height = this.width = 16;
     this.pixels = [];
@@ -15,11 +16,9 @@ export default class Screen {
     let pixelWidth = (canvasHeight / this.height) - this.pixelSpacing;
 
     this.pixels = _.range(16).map((row, rIdx) => {
-      // let rSpacing = this.pixelSpacing * (rIdx + 1);
       let rSpacing = (rIdx > 0) ? this.pixelSpacing * rIdx : 0;
       let y = (rIdx * pixelWidth) + rSpacing;
       return _.range(16).map((pixel, pIdx) => {
-        // let pSpacing = this.pixelSpacing * (pIdx + 1);
         let pSpacing = (pIdx > 0) ? this.pixelSpacing * pIdx : 0;
         let x = (pIdx * pixelWidth) + pSpacing;
         return new Pixel(rIdx, pIdx, x, y, pixelWidth);
@@ -29,6 +28,38 @@ export default class Screen {
 
   render(data) {
     let row = 0, pixel = 0;
+
+    // for (let i = 0; i < animationData.length; i++) {
+    //   let step = animationData[i];
+    //   if (this.firstRender) {
+    //     setTimeout(() => {
+    //       this.renderStep(step);
+    //     }, 500);
+    //   } else {
+    //     this.renderStep(step);
+    //   }
+    // }
+
+    // animationData.forEach(step => {
+    //   [...step].forEach(bit => {
+    //     this.pixels[row][pixel].on = !!+bit; // Convert string '1' or '0' to boolean
+    //     pixel++;
+    //     if (pixel > 15) {
+    //       pixel = 0;
+    //       row++;
+    //     }
+    //   })
+    // })
+
+    // BINARY PARSE
+    [...data].forEach(bit => {
+      this.pixels[row][pixel].on = !!+bit; // Convert string '1' or '0' to boolean
+      pixel++;
+      if (pixel > 15) {
+        pixel = 0;
+        row++;
+      }
+    })
 
     // HEX PARSE
     // [...data].forEach(byte => {
@@ -42,10 +73,12 @@ export default class Screen {
     //     }
     //   })
     // })
+  }
 
-    // BINARY PARSE
-    [...data].forEach(bit => {
-      this.pixels[row][pixel].on = !!+bit; // Convert string 1 or 0 to boolean
+  renderStep(step) {
+    let row = 0, pixel = 0;
+    [...step].forEach(bit => {
+      this.pixels[row][pixel].on = !!+bit; // Convert string '1' or '0' to boolean
       pixel++;
       if (pixel > 15) {
         pixel = 0;
@@ -64,15 +97,13 @@ export default class Screen {
 
   exportBinary() {
     let rtn = '';
-    let count = 0;
     this.pixels.forEach(row => {
       row.forEach(pixel => {
         rtn += pixel.on ? '1' : '0';
-        console.log(count++);
       })
     })
 
-    return parseInt(rtn, 2).toString(16).padStart(64, '0');
+    return rtn;//parseInt(rtn, 2).toString(16).padStart(64, '0');
   }
 
 }

@@ -5,6 +5,6 @@ export default class Character {
   constructor() {
     this.state = CharacterState.NORMAL;
     this.level = CharacterLevel.EGG;
-    this.stateAnnimations = [];
+    this.stateAnimations = [];
   } 
 }
