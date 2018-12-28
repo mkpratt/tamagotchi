@@ -15,6 +15,7 @@ export default class Screen {
     let canvasHeight = this.screenElement.height;
     let pixelWidth = (canvasHeight / this.height) - this.pixelSpacing;
 
+    // initialize pixels array with Pixel objects
     this.pixels = _.range(16).map((row, rIdx) => {
       let rSpacing = (rIdx > 0) ? this.pixelSpacing * rIdx : 0;
       let y = (rIdx * pixelWidth) + rSpacing;
@@ -28,28 +29,6 @@ export default class Screen {
 
   render(data) {
     let row = 0, pixel = 0;
-
-    // for (let i = 0; i < animationData.length; i++) {
-    //   let step = animationData[i];
-    //   if (this.firstRender) {
-    //     setTimeout(() => {
-    //       this.renderStep(step);
-    //     }, 500);
-    //   } else {
-    //     this.renderStep(step);
-    //   }
-    // }
-
-    // animationData.forEach(step => {
-    //   [...step].forEach(bit => {
-    //     this.pixels[row][pixel].on = !!+bit; // Convert string '1' or '0' to boolean
-    //     pixel++;
-    //     if (pixel > 15) {
-    //       pixel = 0;
-    //       row++;
-    //     }
-    //   })
-    // })
 
     // BINARY PARSE
     [...data].forEach(bit => {
@@ -75,17 +54,17 @@ export default class Screen {
     // })
   }
 
-  renderStep(step) {
-    let row = 0, pixel = 0;
-    [...step].forEach(bit => {
-      this.pixels[row][pixel].on = !!+bit; // Convert string '1' or '0' to boolean
-      pixel++;
-      if (pixel > 15) {
-        pixel = 0;
-        row++;
-      }
-    })
-  }
+  // renderStep(step) {
+  //   let row = 0, pixel = 0;
+  //   [...step].forEach(bit => {
+  //     this.pixels[row][pixel].on = !!+bit; // Convert string '1' or '0' to boolean
+  //     pixel++;
+  //     if (pixel > 15) {
+  //       pixel = 0;
+  //       row++;
+  //     }
+  //   })
+  // }
 
   clearScreen() {
     this.pixels.forEach(row => {

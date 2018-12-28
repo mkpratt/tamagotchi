@@ -11,7 +11,6 @@ let character = new One();
 
 setTimeout(() => {
   startAnimations(character.stateAnimations['normal']);
-  // screen.render(character.stateAnimations['normal']);
 }, 0);
 
 draw();
@@ -24,7 +23,7 @@ function startAnimations(animationSet) {
     if (step >= animationSet.length) {
       step = 0;
     }
-  }, 800);
+  }, 700);
 }
 
 function drawPixel(pixel) {
@@ -41,11 +40,10 @@ function draw() {
     })
   })
   
+  // wait for pixels to be rendered
   setTimeout(() => {
     requestAnimationFrame(draw);
   }, 0);
-
-  // setTimeout(draw, 200);
 }
 
 function clearCanvas() {
@@ -53,7 +51,6 @@ function clearCanvas() {
 }
 
 // canvas.addEventListener('click', e => {
-
 //   rowLoop: for(let i = 0; i < screen.pixels.length; i++) {
 //     let row = screen.pixels[i];
 //     pixelLoop: for (let j = 0; j < row.length; j++) {
@@ -67,7 +64,6 @@ function clearCanvas() {
 //       }
 //     }
 //   }
-
 // }, false)
 
 // document.querySelector('#export').addEventListener('click', exportBinary, false); 
