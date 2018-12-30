@@ -9,6 +9,8 @@ const off = '#e5e5e5', on = '#000000';
 let screen = new Screen();
 let character = new One();
 
+var animationInterval;
+
 setTimeout(() => {
   startAnimations(character.stateAnimations['normal']);
 }, 0);
@@ -16,14 +18,17 @@ setTimeout(() => {
 draw();
 
 function startAnimations(animationSet) {
+  clearInterval(animationInterval);
   let step = 0;
-  setInterval(() => {
+  animationInterval = setInterval(renderStep, 700);
+
+  function renderStep() {
     screen.render(animationSet[step]);
     step++;
     if (step >= animationSet.length) {
       step = 0;
     }
-  }, 700);
+  }
 }
 
 function drawPixel(pixel) {
@@ -59,7 +64,7 @@ function clearCanvas() {
 //       if ((pixel.x <= e.offsetX) && (pixel.x + pixel.width >= e.offsetX) &&
 //           (pixel.y <= e.offsetY) && (pixel.y + pixel.width >= e.offsetY)) {
 //         pixel.on = !pixel.on;
-//         console.log(pixel.on);
+//         // console.log(pixel.on);
 //         break rowLoop;
 //       }
 //     }
@@ -72,5 +77,41 @@ function clearCanvas() {
 // }
 // document.querySelector('#clear').addEventListener('click', clearScreen, false); 
 // function clearScreen() {
+//   clearInterval(animationInterval);
 //   screen.clearScreen();
 // }
+
+document.querySelector('#btnNormal').addEventListener('click', setNormal, false); 
+function setNormal() {
+  startAnimations(character.stateAnimations['normal']);
+}
+
+document.querySelector('#btnHungry').addEventListener('click', setHungry, false); 
+function setHungry() {
+  startAnimations(character.stateAnimations['hungry']);
+}
+
+document.querySelector('#btnEating').addEventListener('click', setEating, false); 
+function setEating() {
+  startAnimations(character.stateAnimations['eating']);
+}
+
+document.querySelector('#btnSnacking').addEventListener('click', setSnacking, false); 
+function setSnacking() {
+  startAnimations(character.stateAnimations['snacking']);
+}
+
+document.querySelector('#btnBadMood').addEventListener('click', setBadMood, false); 
+function setBadMood() {
+  startAnimations(character.stateAnimations['badmood']);
+}
+
+document.querySelector('#btnGoodMood').addEventListener('click', setGoodMood, false); 
+function setGoodMood() {
+  startAnimations(character.stateAnimations['goodmood']);
+}
+
+document.querySelector('#btnPooped').addEventListener('click', setPooped, false); 
+function setPooped() {
+  startAnimations(character.stateAnimations['pooped']);
+}

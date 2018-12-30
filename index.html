@@ -7,8 +7,23 @@
     <script defer type="module" src="src/scripts/main.js"></script>
   </head>
   <body>
-    <canvas id="cnv" width="320px" height="320px"></canvas>
-    <!-- <button id="export">export</button>
-    <button id="clear">clear</button> -->
+    <div class="canvas-wrapper">
+      <img src="src/assets/images/scanlines.png" height="320" width="320">
+      <canvas id="cnv" width="320px" height="320px"></canvas>
+    </div>
+    <div class="btn-wrapper">
+      <button id="btnNormal">normal</button>
+      <button id="btnHungry">hungry</button>
+      <button id="btnEating">eating</button>
+      <button id="btnSnacking">snacking</button>
+      <button id="btnBadMood">bad mood</button>
+      <button id="btnGoodMood">good mood</button>
+      <button id="btnPooped">pooped</button>
+    </div>
+    <br>
+    <!-- <div class="btn-wrapper">
+      <button id="export">export</button>
+      <button id="clear">clear</button>
+    </div> -->
   </body>
 </html>
